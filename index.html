@@ -1,51 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>SpeakEasy - Voice Assistant</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<title>SpeakEasy A Voice Translator</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
+<div class="app">
 
-    <h1>🎤 SpeakEasy</h1>
-    <p class="tagline">Speak • Translate • Communicate</p>
+    <h1>🎤 SpeakEasy smart voice translation</h1>
+    <p class="subtitle">Speak in your language, translate in real-time</p>
 
-    <!-- User Info -->
-    <div class="user-info">
-        <input type="text" id="username" placeholder="Enter your name">
-        <input type="text" id="location" placeholder="Enter your location">
-    </div>
+    <div class="card">
 
-    <!-- Language Selection -->
-    <div class="section">
-        <label>Select Language:</label>
-        <select id="language">
-            <option value="hi">Hindi</option>
-            <option value="te">Telugu</option>
-            <option value="en">English</option>
-        </select>
-    </div>
+        <!-- User Info -->
+        <div class="row">
+            <input type="text" placeholder="👤 Your Name">
+            <input type="text" placeholder="📍 Location">
+        </div>
 
-    <!-- Voice Input -->
-    <div class="section">
-        <label>Voice Input:</label>
-        <button onclick="startListening()">🎙️ Speak</button>
-        <p id="inputText">Your speech will appear here...</p>
-    </div>
+        <!-- Language -->
+        <div class="row">
+            <select id="language">
+                <option value="hi">Hindi</option>
+                <option value="te">Telugu</option>
+                <option value="en">English</option>
+            </select>
+        </div>
 
-    <!-- Translation -->
-    <div class="section">
-        <label>Translated Text:</label>
-        <button onclick="translateText()">🔄 Translate</button>
-        <p id="translatedText">Translated output will appear here...</p>
-    </div>
+        <!-- Buttons -->
+        <div class="buttons">
+            <button onclick="startListening()">🎙 Speak</button>
+            <button onclick="translateText()">🔄 Translate</button>
+            <button onclick="speak()">🔊 Listen</button>
+        </div>
 
-    <!-- Voice Output -->
-    <div class="section">
-        <label>Listen Output:</label>
-        <button onclick="speak()">🔊 Listen</button>
+        <!-- Output -->
+        <div class="output">
+            <p><b>Input:</b> <span id="inputText">---</span></p>
+            <p><b>Output:</b> <span id="translatedText">---</span></p>
+        </div>
+
     </div>
 
 </div>
