@@ -18,7 +18,7 @@ By integrating speech recognition, language translation, and text-to-speech tech
 - CSS
 - JavaScript
 - Speech Recognition API
-- Translation API
+- MyMemory Translation API
 - Text-to-Speech API
 
 ## 🎯 Use Case
