@@ -24,5 +24,9 @@ By integrating speech recognition, language translation, and text-to-speech tech
 ## 🎯 Use Case
 Helpful for travelers, elderly users, and real-time communication
 
+## Live Demo
+https://sreejagoundla-coder.github.io/speakEasy-Smart-voice-translation-assistant/
+
+
 ## 👩‍💻 Author
 Sreeja Goundla
