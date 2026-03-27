@@ -10,6 +10,9 @@ function startListening() {
     recognition.onresult = function(event) {
         recognizedText = event.results[0][0].transcript;
         document.getElementById("inputText").innerText = recognizedText;
+
+        // AUTO TRANSLATE 🔥
+        translateText();
     };
 }
 
