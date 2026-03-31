@@ -1,6 +1,6 @@
 # speakEasy-Smart-voice-translation-assistant
-## Project Description:
 
+## Project Description:
 SpeakEasy is a web-based voice-first language assistant designed to eliminate language barriers through real-time communication. The system allows users to speak in their native language, converts the speech into text, translates it into a selected target language, and provides the translated output as voice.
 
 This project focuses on simplicity and accessibility, making it especially useful for travelers and elderly users who may find typing difficult or complex applications hard to use. The application runs directly in a web browser and does not require installation, making it lightweight and platform-independent.
