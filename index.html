@@ -1,53 +1,111 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>SpeakEasy A Voice Translator</title>
-<link rel="stylesheet" href="style.css">
+    <title>SpeakEasy</title>
 </head>
 <body>
 
-<div class="app">
+    <h2>🎤 SpeakEasy - Voice & Text Translator</h2>
 
-    <h1>🎤 SpeakEasy smart voice translation</h1>
-    <p class="subtitle">Speak in your language, translate in real-time</p>
+    <!-- Voice Button -->
+    <button onclick="startListening()">🎤 Speak</button>
 
-    <div class="card">
+    <!-- Text Mode -->
+    <h3>OR Enter Text</h3>
+    <textarea id="textInput" placeholder="Type here..."></textarea><br><br>
+    <button onclick="handleTextInput()">Translate Text</button>
 
-        <!-- User Info -->
-        <div class="row">
-            <input type="text" placeholder="👤 Your Name">
-            <input type="text" placeholder="📍 Location">
-        </div>
+    <br><br>
 
-        <!-- Language -->
-        <div class="row">
-            <select id="language">
-                <option value="hi">Hindi</option>
-                <option value="te">Telugu</option>
-                <option value="en">English</option>
-            </select>
-        </div>
+    <!-- Language Selection -->
+    <select id="language">
+        <option value="hi-IN">Hindi</option>
+        <option value="te-IN">Telugu</option>
+        <option value="ta-IN">Tamil</option>
+        <option value="fr-FR">French</option>
+    </select>
 
-        <!-- Buttons -->
-        <div class="buttons">
-            <button onclick="startListening()">🎙 Speak</button>
-            <button onclick="translateText()">🔄 Translate</button>
-            <button onclick="speak()">🔊 Listen</button>
-            <button onclick="text()">Text</button>
-        </div>
+    <br><br>
 
-        <!-- Output -->
-        <div class="output">
-            <p><b>Input:</b> <span id="inputText">---</span></p>
-            <p><b>Output:</b> <span id="translatedText">---</span></p>
-        </div>
+    <!-- Output -->
+    <h3>Input:</h3>
+    <p id="inputText"></p>
 
-    </div>
+    <h3>Translated:</h3>
+    <p id="translatedText"></p>
 
-</div>
+    <br>
 
-<script src="script.js"></script>
+    <button onclick="speak()">🔊 Speak Output</button>
+
+    <!-- JS START -->
+    <script>
+        let recognizedText = "";
+        let translatedTextGlobal = "";
+
+        // 🎤 Voice Input
+        function startListening() {
+            const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+            recognition.lang = "en-IN";
+
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                recognizedText = event.results[0][0].transcript;
+
+                document.getElementById("inputText").innerText = recognizedText;
+
+                // Auto translate voice
+                translateText(recognizedText);
+            };
+        }
+
+        // ⌨️ Text Input Handler
+        function handleTextInput() {
+            let text = document.getElementById("textInput").value;
+
+            if (text.trim() === "") {
+                alert("Please enter some text bro");
+                return;
+            }
+
+            document.getElementById("inputText").innerText = text;
+
+            translateText(text);
+        }
+
+        // 🌐 Translation Function (COMMON for both)
+        function translateText(inputText) {
+            let targetLang = document.getElementById("language").value;
+
+            let url = `https://api.mymemory.translated.net/get?q=${inputText}&langpair=en|${targetLang}`;
+
+            fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                translatedTextGlobal = data.responseData.translatedText;
+
+                document.getElementById("translatedText").innerText = translatedTextGlobal;
+            })
+            .catch(err => {
+                alert("Translation error");
+                console.log(err);
+            });
+        }
+
+        // 🔊 Speak Output
+        function speak() {
+            if (!translatedTextGlobal) {
+                alert("Nothing to speak");
+                return;
+            }
+
+            let speech = new SpeechSynthesisUtterance(translatedTextGlobal);
+            speech.lang = document.getElementById("language").value;
+
+            window.speechSynthesis.speak(speech);
+        }
+    </script>
 
 </body>
 </html>
